@@ -15,31 +15,25 @@ export default function HomeScreen() {
   return (
     <LinearGradient colors={["#0080ff", "#0066ff"]} style={styles.container}>
       <SafeAreaView style={styles.innerContainer}>
-        {/* Content Section */}
         <View style={styles.contentWrapper}>
-          {/* Logo Icon */}
           <View style={styles.logoContainer}>
             <View style={styles.logo}>
               <Text style={styles.logoText}>S</Text>
             </View>
           </View>
 
-          {/* Welcome Text */}
           <Text style={styles.heading}>Welcome to spehre!</Text>
           <Text style={styles.subtext}>
             Find peers, internships, and job opportunities within your college
             community.
           </Text>
 
-          {/* Create Account Button */}
           <TouchableOpacity style={styles.primaryButton}>
             <Text style={styles.primaryButtonText}>Create Account</Text>
           </TouchableOpacity>
 
-          {/* OR Text */}
           <Text style={styles.orText}>OR</Text>
 
-          {/* Login Button */}
           <Link href="/login" asChild>
             <TouchableOpacity style={styles.secondaryButton}>
               <Text style={styles.secondaryButtonText}>Log In</Text>
@@ -47,7 +41,6 @@ export default function HomeScreen() {
           </Link>
         </View>
 
-        {/* Footer Text */}
         <Text style={styles.footerText}>
           By continuing, you agree to Spehre.ios{" "}
           <Text
@@ -122,8 +115,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: "100%",
     alignItems: "center",
-    elevation: 4, // Android shadow
-    shadowColor: "#000", // iOS shadow
+    elevation: 4,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -145,14 +138,13 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     width: "100%",
     alignItems: "center",
-    marginBottom: 20, // reduced for better shadow visibility
-    elevation: 6, // stronger shadow for Android
+    marginBottom: 20,
+    elevation: 6,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.25,
     shadowRadius: 5,
   },
-
   secondaryButtonText: {
     color: "#000",
     fontWeight: "600",
