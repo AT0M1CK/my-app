@@ -40,24 +40,17 @@ export default function NewPasswordScreen() {
             </TouchableOpacity>
           </View>
 
-          {/* Lock Icon */}
-          <View style={styles.iconWrapper}>
-            <View style={styles.starsBox}>
-              <Text style={styles.stars}>***</Text>
-            </View>
-            <Image
-              source={{
-                uri: "https://img.icons8.com/clouds/100/lock--v1.png",
-              }}
-              style={styles.lockIcon}
-            />
-          </View>
+          {/* Gear + Refresh Icon */}
+          <Image
+            source={{
+              uri: "https://img.icons8.com/fluency/96/settings.png",
+            }}
+            style={styles.gearIcon}
+          />
 
           {/* Title & Subtitle */}
-          <Text style={styles.title}>Set your{"\n"} password</Text>
-          <Text style={styles.subtitle}>
-            Create a new password to secure your account.
-          </Text>
+          <Text style={styles.title}>Choose new{"\n"}password</Text>
+          <Text style={styles.subtitle}>Choose a new password to login</Text>
 
           {/* New Password Input */}
           <View
@@ -68,7 +61,7 @@ export default function NewPasswordScreen() {
           >
             <Ionicons name="lock-closed-outline" size={20} color="#333" />
             <TextInput
-              placeholder="New password"
+              placeholder="New Password"
               placeholderTextColor="#999"
               secureTextEntry
               value={newPassword}
@@ -90,7 +83,7 @@ export default function NewPasswordScreen() {
           >
             <Ionicons name="lock-closed-outline" size={20} color="#333" />
             <TextInput
-              placeholder="Confirm password"
+              placeholder="Confirm Password"
               placeholderTextColor="#999"
               secureTextEntry
               value={confirmPassword}
@@ -118,7 +111,7 @@ export default function NewPasswordScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: { flex: 1, backgroundColor: "#ffffff" },
   innerContainer: { flex: 1, justifyContent: "space-between" },
   scroll: { padding: 20, alignItems: "center" },
 
@@ -147,42 +140,29 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "500",
   },
-  iconWrapper: {
-    alignItems: "center",
-    marginBottom: 20,
+
+  gearIcon: {
+    width: 70,
+    height: 70,
+    resizeMode: "contain",
+    marginBottom: 10,
   },
-  starsBox: {
-    backgroundColor: "#007bff",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
-    zIndex: 1,
-  },
-  stars: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  lockIcon: {
-    width: 50,
-    height: 50,
-    marginTop: -10,
-  },
+
   title: {
     fontWeight: "700",
-    fontSize: 42,
+    fontSize: 36,
     color: "#333",
     textAlign: "left",
     alignSelf: "stretch",
-    lineHeight: 36,
+    lineHeight: 40,
     marginBottom: 10,
   },
   subtitle: {
     color: "#6f6f6f",
-    marginLeft: 7,
+    marginLeft: 4,
     textAlign: "left",
     alignSelf: "stretch",
-    fontSize: 18,
+    fontSize: 16,
     lineHeight: 22,
     marginBottom: 30,
   },
@@ -191,9 +171,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#007bff",
+    borderColor: "#ccc",
     borderRadius: 14,
-    backgroundColor: "#f0f8ff",
     paddingHorizontal: 16,
     height: 60,
     width: "100%",

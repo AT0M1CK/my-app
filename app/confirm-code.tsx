@@ -42,7 +42,7 @@ export default function ConfirmCodeScreen() {
           {/* Header */}
           <View style={styles.header}>
             <TouchableOpacity
-              onPress={() => router.replace("/")}
+              onPress={() => router.replace("/phone-number-screen")}
               style={styles.roundButton}
             >
               <Ionicons name="arrow-back" size={20} color="#007bff" />
