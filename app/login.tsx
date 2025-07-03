@@ -126,7 +126,7 @@ export default function LoginScreen() {
               </TouchableOpacity>
               <TouchableOpacity style={styles.socialButton}>
                 <Image
-                  source={require("../assets/images/apple-logo.png")}
+                  source={require("../assets/images/mac-os.png")}
                   style={styles.socialIcon}
                 />
               </TouchableOpacity>

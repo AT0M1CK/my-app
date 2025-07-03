@@ -42,7 +42,7 @@ export default function NewPasswordScreen() {
 
           {/* Gear + Refresh Icon */}
           <Image
-            source={require("../assets/images/gear-icon.png")}
+            source={require("../assets/images/settings.png")}
             style={styles.gearIcon}
           />
 
