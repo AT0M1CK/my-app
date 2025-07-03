@@ -106,7 +106,7 @@ export default function NewPasswordScreen() {
         {/* Confirm Button */}
         <View style={styles.bottomButtonWrapper}>
           <TouchableOpacity
-            onPress={() => console.log("Password set")}
+            onPress={() => router.replace("/login")}
             style={styles.confirmButton}
           >
             <Text style={styles.confirmText}>Confirm</Text>

@@ -24,132 +24,135 @@ export default function LoginScreen() {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView
-          contentContainerStyle={styles.container}
-          keyboardShouldPersistTaps="handled"
-        >
-          {/* Top Bar */}
-          <View style={styles.topBar}>
-            <TouchableOpacity onPress={() => router.replace("/")}>
+        <View style={styles.mainWrapper}>
+          <ScrollView
+            contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.topBar}>
+              <TouchableOpacity onPress={() => router.replace("/")}>
+                <Ionicons
+                  name="arrow-back"
+                  style={styles.arrowIcon}
+                  size={24}
+                  color="#007bff"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.signupButton}>
+                <Text style={styles.signupButtonText}>Sign up</Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.title}>
+              Login to your account{" "}
               <Ionicons
-                name="arrow-back"
-                style={styles.arrowIcon}
-                size={24}
+                name="lock-closed"
+                size={32}
                 color="#007bff"
+                style={{ marginBottom: -7 }}
               />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.signupButton}>
-              <Text style={styles.signupButtonText}>Sign up</Text>
-            </TouchableOpacity>
-          </View>
-          {/* Title and Icon */}
-          <Text style={styles.title}>
-            Login to your account{" "}
-            <Ionicons
-              name="lock-closed"
-              size={32}
-              color="#007bff"
-              style={{ marginBottom: -7 }}
-            />
-          </Text>
+            </Text>
 
-          <Text style={styles.subtitle}>
-            Enter your credentials to sign in.
-          </Text>
+            <Text style={styles.subtitle}>
+              Enter your credentials to sign in.
+            </Text>
 
-          {/* Email Input */}
-          <View
-            style={[styles.inputContainer, emailFocused && styles.inputFocused]}
-          >
-            <MaterialIcons
-              name="email"
-              size={20}
-              color={emailFocused ? "#007bff" : "#999"}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              placeholder="Email"
-              style={styles.input}
-              placeholderTextColor="#999"
-              onFocus={() => setEmailFocused(true)}
-              onBlur={() => setEmailFocused(false)}
-            />
-          </View>
+            <View
+              style={[
+                styles.inputContainer,
+                emailFocused && styles.inputFocused,
+              ]}
+            >
+              <MaterialIcons
+                name="email"
+                size={20}
+                color={emailFocused ? "#007bff" : "#999"}
+                style={styles.inputIcon}
+              />
+              <TextInput
+                placeholder="Email"
+                style={styles.input}
+                placeholderTextColor="#999"
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
+              />
+            </View>
 
-          {/* Password Input */}
-          <View
-            style={[
-              styles.inputContainer,
-              passwordFocused && styles.inputFocused,
-            ]}
-          >
-            <MaterialIcons
-              name="lock"
-              size={20}
-              color={passwordFocused ? "#007bff" : "#999"}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              placeholder="Password"
-              secureTextEntry={!showPassword}
-              style={styles.input}
-              placeholderTextColor="#999"
-              onFocus={() => setPasswordFocused(true)}
-              onBlur={() => setPasswordFocused(false)}
-            />
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              <Ionicons
-                name={showPassword ? "eye-off" : "eye"}
+            <View
+              style={[
+                styles.inputContainer,
+                passwordFocused && styles.inputFocused,
+              ]}
+            >
+              <MaterialIcons
+                name="lock"
                 size={20}
                 color={passwordFocused ? "#007bff" : "#999"}
+                style={styles.inputIcon}
               />
-            </TouchableOpacity>
-          </View>
+              <TextInput
+                placeholder="Password"
+                secureTextEntry={!showPassword}
+                style={styles.input}
+                placeholderTextColor="#999"
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
+              />
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                <Ionicons
+                  name={showPassword ? "eye-off" : "eye"}
+                  size={20}
+                  color={passwordFocused ? "#007bff" : "#999"}
+                />
+              </TouchableOpacity>
+            </View>
 
-          {/* Forgot Password */}
-          <TouchableOpacity style={styles.forgotPassword}>
-            <Text
-              onPress={() => router.replace("/new-password")}
-              style={styles.link}
-            >
-              Forgot Password?
+            <TouchableOpacity style={styles.forgotPassword}>
+              <Text
+                onPress={() => router.replace("/new-password")}
+                style={styles.link}
+              >
+                Forgot Password?
+              </Text>
+            </TouchableOpacity>
+
+            <Text style={styles.orText}>Or login using</Text>
+            <View style={styles.socialContainer}>
+              <TouchableOpacity style={styles.socialButton}>
+                <Image
+                  source={{
+                    uri: "https://img.icons8.com/color/48/google-logo.png",
+                  }}
+                  style={styles.socialIcon}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.socialButton}>
+                <Image
+                  source={{
+                    uri: "https://img.icons8.com/ios-filled/50/000000/mac-os.png",
+                  }}
+                  style={styles.socialIcon}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.bottomText}>
+              Don’t have an account?{" "}
+              <TouchableOpacity>
+                <Text style={styles.link}>sign up?</Text>
+              </TouchableOpacity>
             </Text>
-          </TouchableOpacity>
+          </ScrollView>
 
-          {/* Social Login */}
-          <Text style={styles.orText}>Or login using</Text>
-          <View style={styles.socialContainer}>
-            <TouchableOpacity style={styles.socialButton}>
-              <Image
-                source={{
-                  uri: "https://img.icons8.com/color/48/google-logo.png",
-                }}
-                style={styles.socialIcon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton}>
-              <Image
-                source={{
-                  uri: "https://img.icons8.com/ios-filled/50/000000/mac-os.png",
-                }}
-                style={styles.socialIcon}
-              />
+          <View style={styles.bottomButtonWrapper}>
+            <TouchableOpacity
+              onPress={() => router.replace("/phone-number-screen")}
+              style={styles.confirmButton}
+            >
+              <Text style={styles.confirmText}>Confirm</Text>
             </TouchableOpacity>
           </View>
-
-          {/* Bottom Signup */}
-          <Text style={styles.bottomText}>
-            Don’t have an account? <Text style={styles.link}>sign up?</Text>
-          </Text>
-
-          {/* Confirm Button */}
-          <TouchableOpacity
-            onPress={() => router.replace("/phone-number-screen")}
-            style={styles.confirmButton}
-          >
-            <Text style={styles.confirmText}>Confirm</Text>
-          </TouchableOpacity>
-        </ScrollView>
+        </View>
       </SafeAreaView>
     </LinearGradient>
   );
@@ -162,6 +165,10 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
+  mainWrapper: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
   container: {
     padding: 20,
     alignItems: "center",
@@ -173,14 +180,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 30,
   },
-
   arrowIcon: {
     borderWidth: 1,
     borderColor: "#007bff",
     padding: 6,
     borderRadius: 999,
   },
-
   signupButton: {
     borderWidth: 1,
     borderColor: "#007bff",
@@ -188,26 +193,11 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 999,
   },
-
   signupButtonText: {
     color: "#007bff",
     fontWeight: "500",
     fontSize: 16,
   },
-  titleRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-    alignSelf: "stretch",
-  },
-
-  inlineIcon: {
-    width: 32,
-    height: 32,
-    marginLeft: 8,
-    marginTop: -10, // adjust to align better with baseline
-  },
-
   title: {
     fontWeight: "700",
     fontSize: 42,
@@ -226,15 +216,9 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginBottom: 30,
   },
-  icon: {
-    width: 60,
-    height: 60,
-    marginVertical: 10,
-  },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 12,
@@ -269,12 +253,18 @@ const styles = StyleSheet.create({
   socialContainer: {
     flexDirection: "row",
     gap: 20,
-    marginBottom: 20,
+    marginBottom: 25,
+    marginTop: 15,
   },
   socialButton: {
-    backgroundColor: "#fff",
-    padding: 18,
+    backgroundColor: "#efefef",
+    alignItems: "center",
+    paddingHorizontal: 18,
+    paddingVertical: 13,
+    borderWidth: 1,
+    width: "45%",
     borderRadius: 14,
+    borderColor: "#c1c1c1",
     elevation: 2,
   },
   socialIcon: {
@@ -285,13 +275,22 @@ const styles = StyleSheet.create({
     color: "#666",
     marginBottom: 20,
   },
+  bottomButtonWrapper: {
+    padding: 20,
+  },
   confirmButton: {
     backgroundColor: "#007bff",
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 24,
+    borderRadius: 999,
+    paddingVertical: 16,
+    paddingHorizontal: 50,
     width: "100%",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+    marginBottom: 10,
   },
   confirmText: {
     color: "#fff",

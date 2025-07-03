@@ -47,7 +47,10 @@ export default function ConfirmCodeScreen() {
             >
               <Ionicons name="arrow-back" size={20} color="#007bff" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loginBtn}>
+            <TouchableOpacity
+              onPress={() => router.replace("/login")}
+              style={styles.loginBtn}
+            >
               <Text style={styles.loginText}>Log In</Text>
             </TouchableOpacity>
           </View>
@@ -100,7 +103,10 @@ export default function ConfirmCodeScreen() {
 
         {/* Confirm Button (fixed at bottom) */}
         <View style={styles.bottomButtonWrapper}>
-          <TouchableOpacity style={styles.confirmButton}>
+          <TouchableOpacity
+            onPress={() => router.replace("/")}
+            style={styles.confirmButton}
+          >
             <Text style={styles.confirmText}>Confirm</Text>
           </TouchableOpacity>
         </View>
