@@ -42,20 +42,16 @@ export default function LoginScreen() {
               <Text style={styles.signupButtonText}>Sign up</Text>
             </TouchableOpacity>
           </View>
-
           {/* Title and Icon */}
-          <Text style={styles.title}>
-            Login to your <Text style={styles.titleBold}>account</Text>
-          </Text>
-          <Image
-            source={{
-              uri: "https://img.icons8.com/clouds/100/000000/lock--v1.png",
-            }}
-            style={styles.icon}
-          />
-          <Text style={styles.subtitle}>
-            Enter your credentials to sign in.
-          </Text>
+          <View style={styles.titleRow}>
+            <Text style={styles.title}>Login to your {"\n"}account</Text>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/clouds/100/000000/lock--v1.png",
+              }}
+              style={styles.inlineIcon}
+            />
+          </View>
 
           {/* Email Input */}
           <View
@@ -195,20 +191,37 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  title: {
-    fontSize: 28,
-    textAlign: "center",
-    fontWeight: "400",
-    color: "#000",
+  titleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+    alignSelf: "stretch",
   },
-  titleBold: {
+
+  inlineIcon: {
+    width: 32,
+    height: 32,
+    marginLeft: 8,
+    marginTop: -5, // adjust to align better with baseline
+  },
+
+  title: {
     fontWeight: "700",
+    fontSize: 42,
+    color: "#333",
+    textAlign: "left",
+    alignSelf: "stretch",
+    lineHeight: 36,
+    marginBottom: 10,
   },
   subtitle: {
-    color: "#555",
-    fontSize: 16,
-    textAlign: "center",
-    marginVertical: 10,
+    color: "#6f6f6f",
+    marginLeft: 7,
+    textAlign: "left",
+    alignSelf: "stretch",
+    fontSize: 18,
+    lineHeight: 22,
+    marginBottom: 30,
   },
   icon: {
     width: 60,
