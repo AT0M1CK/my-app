@@ -66,11 +66,9 @@ export default function ConfirmCodeScreen() {
           </View>
 
           {/* Title */}
-          <Text style={styles.title}>
-            Confirm your <Text style={styles.titleBold}>number</Text>
-          </Text>
+          <Text style={styles.title}> Confirm your{"\n"} number</Text>
           <Text style={styles.subtitle}>
-            Enter the code we sent to the number ending with 0957
+            Enter the code we sent to the number {"\n"}ending with 0957
           </Text>
 
           {/* OTP Inputs */}
@@ -171,35 +169,38 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "400",
+    fontWeight: "700",
+    fontSize: 42,
     color: "#333",
     textAlign: "left",
-    alignSelf: "flex-start",
-    marginBottom: 5,
-  },
-  titleBold: {
-    fontWeight: "700",
+    alignSelf: "stretch",
+    lineHeight: 36,
+    marginBottom: 10,
   },
   subtitle: {
-    color: "#999",
+    color: "#6f6f6f",
+    marginLeft: 7,
     textAlign: "left",
-    alignSelf: "flex-start",
+    alignSelf: "stretch",
+    fontSize: 18,
+    lineHeight: 22,
     marginBottom: 30,
   },
   codeContainer: {
     flexDirection: "row",
-    justifyContent: "space-evenly", // spread items evenly
+    justifyContent: "space-evenly",
     alignItems: "center",
-    width: "100%", // fill available horizontal space
+    width: "100%",
     marginBottom: 40,
   },
   codeWrapper: {
     position: "relative",
     flex: 1,
     alignItems: "center",
-    maxWidth: 80, // limits max size per box
+    maxWidth: 80,
+    marginHorizontal: 6,
   },
+
   codeInput: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -212,12 +213,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9f9f9",
     maxWidth: 70,
     minWidth: 60,
-    // Shadow
     shadowColor: "#505050",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 4, // Android shadow
+    elevation: 4,
   },
 
   codeInputFocused: {
@@ -235,14 +235,14 @@ const styles = StyleSheet.create({
   bottomButtonWrapper: {
     paddingHorizontal: 20,
     paddingTop: 10,
-    paddingBottom: 50, // 🔹 gives space from the bottom edge
+    paddingBottom: 50,
     backgroundColor: "#fff",
   },
 
   confirmButton: {
     backgroundColor: "#007bff",
     borderRadius: 999,
-    paddingVertical: 18, // increased from 14
+    paddingVertical: 18,
     paddingHorizontal: 50,
     width: "100%",
     alignItems: "center",
