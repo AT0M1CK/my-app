@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -7,76 +7,106 @@ import {
   StyleSheet,
   SafeAreaView,
   Image,
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 
 export default function ConfirmCodeScreen() {
   const [code, setCode] = useState(["", "", "", ""]);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+  const inputsRef = useRef<Array<TextInput | null>>([]);
 
   const handleInputChange = (text: string, index: number) => {
     const newCode = [...code];
-    newCode[index] = text.slice(-1); // Only last char
+    newCode[index] = text.slice(-1);
     setCode(newCode);
-    // Auto-focus next input (optional)
+    if (text && index < 3) {
+      inputsRef.current[index + 1]?.focus();
+    }
+  };
+
+  const handleBackspace = (e: any, index: number) => {
+    if (e.nativeEvent.key === "Backspace" && !code[index] && index > 0) {
+      inputsRef.current[index - 1]?.focus();
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        {/* <Link href="/(tabs)/index" asChild> */}
-        <TouchableOpacity
-          onPress={() => router.replace("/")}
-          style={styles.roundButton}
+      <View style={styles.innerContainer}>
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          keyboardShouldPersistTaps="handled"
         >
-          <Ionicons name="arrow-back" size={20} color="#007bff" />
-        </TouchableOpacity>
-        {/* </Link> */}
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Log In</Text>
-        </TouchableOpacity>
-      </View>
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => router.replace("/")}
+              style={styles.roundButton}
+            >
+              <Ionicons name="arrow-back" size={20} color="#007bff" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.loginBtn}>
+              <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+          </View>
 
-      {/* Lock Icon with stars */}
-      <View style={styles.iconWrapper}>
-        <View style={styles.starsBox}>
-          <Text style={styles.stars}>***</Text>
+          {/* Lock Icon */}
+          <View style={styles.iconWrapper}>
+            <View style={styles.starsBox}>
+              <Text style={styles.stars}>***</Text>
+            </View>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/clouds/100/lock--v1.png",
+              }}
+              style={styles.lockIcon}
+            />
+          </View>
+
+          {/* Title */}
+          <Text style={styles.title}>
+            Confirm your <Text style={styles.titleBold}>number</Text>
+          </Text>
+          <Text style={styles.subtitle}>
+            Enter the code we sent to the number ending with 0957
+          </Text>
+
+          {/* OTP Inputs */}
+          <View style={styles.codeContainer}>
+            {code.map((digit, idx) => (
+              <View key={idx} style={styles.codeWrapper}>
+                <TextInput
+                  ref={(ref) => {
+                    inputsRef.current[idx] = ref;
+                  }}
+                  value={digit}
+                  onChangeText={(text) => handleInputChange(text, idx)}
+                  onKeyPress={(e) => handleBackspace(e, idx)}
+                  keyboardType="number-pad"
+                  maxLength={1}
+                  caretHidden={true}
+                  onFocus={() => setFocusedIndex(idx)}
+                  onBlur={() => setFocusedIndex(null)}
+                  style={[
+                    styles.codeInput,
+                    focusedIndex === idx && styles.codeInputFocused,
+                  ]}
+                />
+                {focusedIndex === idx && <View style={styles.fakeCaret} />}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+
+        {/* Confirm Button (fixed at bottom) */}
+        <View style={styles.bottomButtonWrapper}>
+          <TouchableOpacity style={styles.confirmButton}>
+            <Text style={styles.confirmText}>Confirm</Text>
+          </TouchableOpacity>
         </View>
-        <Image
-          source={{
-            uri: "https://img.icons8.com/clouds/100/lock--v1.png",
-          }}
-          style={styles.lockIcon}
-        />
       </View>
-
-      {/* Title and Subtitle */}
-      <Text style={styles.title}>
-        Confirm your <Text style={styles.titleBold}>number</Text>
-      </Text>
-      <Text style={styles.subtitle}>
-        Enter the code we sent to the number ending with 0957
-      </Text>
-
-      {/* Code Inputs */}
-      <View style={styles.codeContainer}>
-        {code.map((digit, idx) => (
-          <TextInput
-            key={idx}
-            style={styles.codeInput}
-            keyboardType="number-pad"
-            maxLength={1}
-            value={digit}
-            onChangeText={(text) => handleInputChange(text, idx)}
-          />
-        ))}
-      </View>
-
-      {/* Confirm Button */}
-      <TouchableOpacity style={styles.confirmButton}>
-        <Text style={styles.confirmText}>Confirm</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -85,6 +115,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  scroll: {
     padding: 20,
     alignItems: "center",
   },
@@ -138,38 +174,75 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "400",
     color: "#333",
-    textAlign: "center",
-    marginBottom: 10,
+    textAlign: "left",
+    alignSelf: "flex-start",
+    marginBottom: 5,
   },
   titleBold: {
     fontWeight: "700",
   },
   subtitle: {
     color: "#999",
-    textAlign: "center",
+    textAlign: "left",
+    alignSelf: "flex-start",
     marginBottom: 30,
   },
   codeContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: "80%",
+    justifyContent: "space-evenly", // spread items evenly
+    alignItems: "center",
+    width: "100%", // fill available horizontal space
     marginBottom: 40,
+  },
+  codeWrapper: {
+    position: "relative",
+    flex: 1,
+    alignItems: "center",
+    maxWidth: 80, // limits max size per box
   },
   codeInput: {
     borderWidth: 1,
-    borderColor: "#007bff",
-    borderRadius: 20,
-    width: 55,
-    height: 55,
+    borderColor: "#ccc",
+    borderRadius: 30,
+    width: "100%",
+    height: 58,
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 22,
     color: "#333",
     backgroundColor: "#f9f9f9",
+    maxWidth: 70,
+    minWidth: 60,
+    // Shadow
+    shadowColor: "#505050",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 4, // Android shadow
   },
+
+  codeInputFocused: {
+    borderColor: "#007bff",
+  },
+  fakeCaret: {
+    position: "absolute",
+    bottom: 12,
+    left: "50%",
+    transform: [{ translateX: -8 }],
+    width: 16,
+    height: 2,
+    backgroundColor: "#757576",
+  },
+  bottomButtonWrapper: {
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 50, // 🔹 gives space from the bottom edge
+    backgroundColor: "#fff",
+  },
+
   confirmButton: {
     backgroundColor: "#007bff",
     borderRadius: 999,
-    paddingVertical: 14,
+    paddingVertical: 18, // increased from 14
     paddingHorizontal: 50,
     width: "100%",
     alignItems: "center",
@@ -179,6 +252,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
+
   confirmText: {
     color: "#fff",
     fontWeight: "bold",
