@@ -31,11 +31,8 @@ export default function PhoneNumberScreen() {
             >
               <Ionicons name="arrow-back" size={20} color="#007bff" />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => router.replace("/login")}
-              style={styles.loginBtn}
-            >
-              <Text style={styles.loginText}>Log In</Text>
+            <TouchableOpacity style={styles.loginBtn}>
+              <Text style={styles.loginText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
 
