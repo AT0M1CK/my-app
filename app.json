@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.fuzedev.myapp" 
+      "package": "com.fuzedev.myapp"
     },
     "web": {
       "bundler": "metro",
@@ -38,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "b50d8122-3d54-4b5f-9531-1ec8854861dd"
+      }
     }
   }
 }

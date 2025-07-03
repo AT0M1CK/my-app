@@ -61,9 +61,7 @@ export default function ConfirmCodeScreen() {
               <Text style={styles.stars}>***</Text>
             </View>
             <Image
-              source={{
-                uri: "https://img.icons8.com/clouds/100/lock--v1.png",
-              }}
+              source={require("../assets/images/lock-icon.png")}
               style={styles.lockIcon}
             />
           </View>

@@ -42,9 +42,7 @@ export default function NewPasswordScreen() {
 
           {/* Gear + Refresh Icon */}
           <Image
-            source={{
-              uri: "https://img.icons8.com/fluency/96/settings.png",
-            }}
+            source={require("../assets/images/gear-icon.png")}
             style={styles.gearIcon}
           />
 

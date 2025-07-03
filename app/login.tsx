@@ -120,17 +120,13 @@ export default function LoginScreen() {
             <View style={styles.socialContainer}>
               <TouchableOpacity style={styles.socialButton}>
                 <Image
-                  source={{
-                    uri: "https://img.icons8.com/color/48/google-logo.png",
-                  }}
+                  source={require("../assets/images/google-logo.png")}
                   style={styles.socialIcon}
                 />
               </TouchableOpacity>
               <TouchableOpacity style={styles.socialButton}>
                 <Image
-                  source={{
-                    uri: "https://img.icons8.com/ios-filled/50/000000/mac-os.png",
-                  }}
+                  source={require("../assets/images/apple-logo.png")}
                   style={styles.socialIcon}
                 />
               </TouchableOpacity>
