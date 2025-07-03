@@ -43,15 +43,19 @@ export default function LoginScreen() {
             </TouchableOpacity>
           </View>
           {/* Title and Icon */}
-          <View style={styles.titleRow}>
-            <Text style={styles.title}>Login to your {"\n"}account</Text>
-            <Image
-              source={{
-                uri: "https://img.icons8.com/clouds/100/000000/lock--v1.png",
-              }}
-              style={styles.inlineIcon}
+          <Text style={styles.title}>
+            Login to your account{" "}
+            <Ionicons
+              name="lock-closed"
+              size={32}
+              color="#007bff"
+              style={{ marginBottom: -7 }}
             />
-          </View>
+          </Text>
+
+          <Text style={styles.subtitle}>
+            Enter your credentials to sign in.
+          </Text>
 
           {/* Email Input */}
           <View
@@ -190,7 +194,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 16,
   },
-
   titleRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -202,7 +205,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     marginLeft: 8,
-    marginTop: -5, // adjust to align better with baseline
+    marginTop: -10, // adjust to align better with baseline
   },
 
   title: {
