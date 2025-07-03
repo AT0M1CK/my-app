@@ -139,7 +139,7 @@ export default function LoginScreen() {
 
           {/* Confirm Button */}
           <TouchableOpacity
-            onPress={() => router.replace("/confirm-code")}
+            onPress={() => router.replace("/phone-number-screen")}
             style={styles.confirmButton}
           >
             <Text style={styles.confirmText}>Confirm</Text>

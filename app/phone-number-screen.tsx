@@ -1,0 +1,221 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  ScrollView,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+
+export default function PhoneNumberScreen() {
+  const [phone, setPhone] = useState("");
+  const [focused, setFocused] = useState(false);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => router.replace("/login")}
+              style={styles.roundButton}
+            >
+              <Ionicons name="arrow-back" size={20} color="#007bff" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => router.replace("/login")}
+              style={styles.loginBtn}
+            >
+              <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Lock Icon */}
+          <View style={styles.iconWrapper}>
+            <View style={styles.starsBox}>
+              <Text style={styles.stars}>***</Text>
+            </View>
+            <Image
+              source={{
+                uri: "https://img.icons8.com/clouds/100/lock--v1.png",
+              }}
+              style={styles.lockIcon}
+            />
+          </View>
+
+          {/* Title & Subtitle */}
+          <Text style={styles.title}> Enter your phone{"\n"} number</Text>
+          <Text style={styles.subtitle}>
+            We will send an OTP verification to you.
+          </Text>
+
+          {/* Phone Number Input */}
+          <View
+            style={[
+              styles.phoneInputWrapper,
+              focused && styles.phoneInputFocused,
+            ]}
+          >
+            <Text style={styles.countryCode}>+91</Text>
+            <View style={styles.separator} />
+            <TextInput
+              placeholder="Phone number"
+              placeholderTextColor="#999"
+              keyboardType="number-pad"
+              value={phone}
+              onChangeText={setPhone}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              style={styles.phoneInput}
+            />
+          </View>
+        </ScrollView>
+
+        {/* Confirm Button */}
+        <View style={styles.bottomButtonWrapper}>
+          <TouchableOpacity
+            onPress={() => router.replace("/confirm-code")}
+            style={styles.confirmButton}
+          >
+            <Text style={styles.confirmText}>Confirm</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff" },
+  innerContainer: { flex: 1, justifyContent: "space-between" },
+  scroll: { padding: 20, alignItems: "center" },
+
+  header: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 30,
+  },
+  roundButton: {
+    borderWidth: 1,
+    borderColor: "#007bff",
+    borderRadius: 50,
+    padding: 8,
+  },
+  loginBtn: {
+    borderWidth: 1,
+    borderColor: "#007bff",
+    borderRadius: 20,
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+  },
+  loginText: {
+    color: "#007bff",
+    fontSize: 14,
+    fontWeight: "500",
+  },
+  iconWrapper: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  starsBox: {
+    backgroundColor: "#007bff",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 6,
+    zIndex: 1,
+  },
+  stars: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  lockIcon: {
+    width: 50,
+    height: 50,
+    marginTop: -10,
+  },
+  title: {
+    fontWeight: "700",
+    fontSize: 42,
+    color: "#333",
+    textAlign: "left",
+    alignSelf: "stretch",
+    lineHeight: 36,
+    marginBottom: 10,
+  },
+  subtitle: {
+    color: "#6f6f6f",
+    marginLeft: 7,
+    textAlign: "left",
+    alignSelf: "stretch",
+    fontSize: 18,
+    lineHeight: 22,
+    marginBottom: 30,
+  },
+  phoneInputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#007bff",
+    borderRadius: 20,
+    backgroundColor: "#f0f8ff",
+    paddingHorizontal: 20,
+    height: 60,
+    width: "100%",
+  },
+  phoneInputFocused: {
+    borderColor: "#007bff",
+    backgroundColor: "#e6f2ff",
+  },
+  countryCode: {
+    fontSize: 16,
+    color: "#333",
+    marginRight: 10,
+  },
+  separator: {
+    width: 1,
+    height: "60%",
+    backgroundColor: "#8dbaf0",
+    marginHorizontal: 10,
+  },
+  phoneInput: {
+    flex: 1,
+    fontSize: 18,
+    color: "#333",
+  },
+
+  bottomButtonWrapper: {
+    padding: 20,
+    backgroundColor: "#fff",
+  },
+  confirmButton: {
+    backgroundColor: "#007bff",
+    borderRadius: 999,
+    paddingVertical: 16, // slightly increased
+    paddingHorizontal: 50,
+    width: "100%",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+    marginBottom: 10,
+  },
+  confirmText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+});
