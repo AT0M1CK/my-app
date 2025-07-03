@@ -1,75 +1,154 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Linking,
+  SafeAreaView,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Link } from "expo-router";
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <LinearGradient colors={["#ffffff", "#007bff"]} style={styles.container}>
+      <SafeAreaView style={styles.innerContainer}>
+        {/* Logo Icon */}
+        <View style={styles.logoContainer}>
+          <View style={styles.logo}>
+            <Text style={styles.logoText}>S</Text>
+          </View>
+        </View>
+
+        {/* Welcome Text */}
+        <Text style={styles.heading}>Welcome to spehre!</Text>
+        <Text style={styles.subtext}>
+          Find peers, internships, and job opportunities within your college
+          community.
+        </Text>
+
+        {/* Create Account Button */}
+        <TouchableOpacity style={styles.primaryButton}>
+          <Text style={styles.primaryButtonText}>Create Account</Text>
+        </TouchableOpacity>
+
+        {/* OR Text */}
+        <Text style={styles.orText}>OR</Text>
+
+        {/* Login Button */}
+        <Link href="/login" asChild>
+          <TouchableOpacity style={styles.secondaryButton}>
+            <Text style={styles.secondaryButtonText}>Log In</Text>
+          </TouchableOpacity>
+        </Link>
+
+        {/* Terms and Privacy */}
+        <Text style={styles.footerText}>
+          By continuing, you agree to Spehre.ios{" "}
+          <Text
+            style={styles.link}
+            onPress={() => Linking.openURL("https://spehre.io/terms")}
+          >
+            Terms of Service
+          </Text>{" "}
+          and{" "}
+          <Text
+            style={styles.link}
+            onPress={() => Linking.openURL("https://spehre.io/privacy")}
+          >
+            Privacy Policy
+          </Text>
+        </Text>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  innerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  logoContainer: {
+    marginBottom: 32,
+  },
+  logo: {
+    backgroundColor: "#ffffff",
+    width: 72,
+    height: 72,
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 4,
+  },
+  logoText: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#007bff",
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#ffffff",
+    textAlign: "center",
+    marginBottom: 12,
+  },
+  subtext: {
+    color: "#e1e1e1",
+    fontSize: 14,
+    textAlign: "center",
+    marginBottom: 40,
+    paddingHorizontal: 10,
+  },
+  primaryButton: {
+    backgroundColor: "#ffffff",
+    paddingVertical: 14,
+    paddingHorizontal: 36,
+    borderRadius: 24,
+    marginBottom: 10,
+    width: "100%",
+    alignItems: "center",
+    elevation: 2,
+  },
+  primaryButtonText: {
+    color: "#007bff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  orText: {
+    color: "#fff",
+    marginBottom: 10,
+    fontWeight: "600",
+  },
+  secondaryButton: {
+    backgroundColor: "#f2f2f2",
+    paddingVertical: 14,
+    paddingHorizontal: 36,
+    borderRadius: 24,
+    width: "100%",
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  secondaryButtonText: {
+    color: "#000",
+    fontWeight: "600",
+    fontSize: 16,
+  },
+  footerText: {
+    color: "#ffffff",
+    textAlign: "center",
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  link: {
+    textDecorationLine: "underline",
+    color: "#cce6ff",
   },
 });
